@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Pinterest</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #e60023;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .header .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .header .nav-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header .nav-icons i {
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .header .nav-icons i:hover {
+            color: #ffcccb;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .pin {
+            width: 250px;
+            margin: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .pin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .pin img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .pin .pin-info {
+            padding: 10px;
+        }
+
+        .pin .pin-info h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .pin .pin-info p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .pin .pin-info button {
+            background-color: #e60023;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pin .pin-info button:hover {
+            background-color: #ff4c4c;
+        }
+
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #e60023;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer .social-icons {
+            margin-top: 10px;
+        }
+
+        .footer .social-icons i {
+            font-size: 24px;
+            color: #e60023;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons i:hover {
+            color: #ff4c4c;
+        }
+    </style>
+    <!-- FontAwesome Icons CDN -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Pinterest</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+        </div>
+        <div class="nav-icons">
+            <i class="fas fa-home"></i>
+            <i class="fas fa-compass"></i>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-envelope"></i>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="pin" onclick="openPinPage('beautiful-sunset', 'John Doe', '2021-07-15', 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0')">
+            <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Beautiful Sunset">
+            <div class="pin-info">
+                <h4>Beautiful Sunset</h4>
+                <p>John Doe</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('mountain-view', 'Jane Smith', '2021-06-10', 'https://images.unsplash.com/photo-1483800978998-91eb3766a70e')">
+            <img src="https://images.unsplash.com/photo-1483800978998-91eb3766a70e" alt="Mountain View">
+            <div class="pin-info">
+                <h4>Mountain View</h4>
+                <p>Jane Smith</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('city-skyline', 'Michael Brown', '2021-05-20', 'https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb')">
+            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" alt="City Skyline">
+            <div class="pin-info">
+                <h4>City Skyline</h4>
+                <p>Michael Brown</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('forest-path', 'Emily White', '2021-08-01', 'https://images.unsplash.com/photo-1444044205806-38f3ed106c10')">
+            <img src="https://images.unsplash.com/photo-1444044205806-38f3ed106c10" alt="Forest Path">
+            <div class="pin-info">
+                <h4>Forest Path</h4>
+                <p>Emily White</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('ocean-waves', 'Chris Black', '2021-09-12', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Ocean Waves">
+            <div class="pin-info">
+                <h4>Ocean Waves</h4>
+                <p>Chris Black</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('desert-dunes', 'Laura Green', '2021-10-05', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470')">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Desert Dunes">
+            <div class="pin-info">
+                <h4>Desert Dunes</h4>
+                <p>Laura Green</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('snowy-mountains', 'Jake Blue', '2021-11-15', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e')">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="Snowy Mountains">
+            <div class="pin-info">
+                <h4>Snowy Mountains</h4>
+                <p>Jake Blue</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('green-meadows', 'Sophia Brown', '2021-12-20', 'https://images.unsplash.com/photo-1433446787703-42d5bf446876')">
+            <img src="https://images.unsplash.com/photo-1433446787703-42d5bf446876" alt="Green Meadows">
+            <div class="pin-info">
+                <h4>Green Meadows</h4>
+                <p>Sophia Brown</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('sunflower-field', 'Liam Grey', '2022-01-18', 'https://images.unsplash.com/photo-1505577058444-a3dab90d4253')">
+            <img src="https://images.unsplash.com/photo-1505577058444-a3dab90d4253" alt="Sunflower Field">
+            <div class="pin-info">
+                <h4>Sunflower Field</h4>
+                <p>Liam Grey</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+        <div class="pin" onclick="openPinPage('calm-lake', 'Ella White', '2022-02-22', 'https://images.unsplash.com/photo-1517511620798-cec17d428bc0')">
+            <img src="https://images.unsplash.com/photo-1517511620798-cec17d428bc0" alt="Calm Lake">
+            <div class="pin-info">
+                <h4>Calm Lake</h4>
+                <p>Ella White</p>
+                <button>Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="#">À propos</a>
+        <a href="#">Blog</a>
+        <a href="#">Carrières</a>
+        <a href="#">Aide</a>
+        <div class="social-icons">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </div>
+
+    <script>
+        function openPinPage(title, author, date, imageUrl) {
+            const pinPage = window.open("", "_blank");
+            pinPage.document.write(`
+                <html>
+                <head>
+                    <title>${title}</title>
+                    <style>
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background-color: #f4f4f4;
+                        }
+                        .pin-details {
+                            background: white;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            text-align: center;
+                        }
+                        .pin-details img {
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 10px;
+                            margin-bottom: 20px;
+                        }
+                        .pin-details h2 {
+                            margin: 0;
+                            font-size: 24px;
+                        }
+                        .pin-details p {
+                            margin: 10px 0;
+                            color: #666;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="pin-details">
+                        <img src="${imageUrl}" alt="${title}">
+                        <h2>${title}</h2>
+                        <p>Author: ${author}</p>
+                        <p>Date: ${date}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            pinPage.document.close();
+        }
+    </script>
+</body>
+</html>
