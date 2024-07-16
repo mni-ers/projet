@@ -1,4 +1,6 @@
 from flask import Flask ,render_template,redirect,url_for,request,session,send_file
+from models.users import User
+
 
 app = Flask(__name__)
 app.secret_key = "A_A"
@@ -13,8 +15,7 @@ params = {
     "page": 1
 }
 
-def fetch_unsplash_api():
-    
+
 
 
 @app.route('/',methods=['GET','POST'])
@@ -23,7 +24,13 @@ def main():
     return render_template('home.html',sup_infos=["azerty","qwerty","01001"])
 
 
+@app.route('/login',methods=['POST','GET'])
+def loger():
+    return render_template('login.html',sup_infos=["azerty","qwerty","01001"])
 
+@app.route('/sign-up',methods=['GET','POST'])
+def signer():
+    return render_template('sign-up.html',sup_infos=["azerty","qwerty","01001"])
 
 if __name__ == '__main__':
     app.run(debug=True)
