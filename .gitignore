@@ -1,0 +1,7 @@
+# Flask
+instance/
+.webassets-cache
+__pycache__/
+*.py[cod]
+
+# Static files
