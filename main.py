@@ -1,9 +1,26 @@
-from flask import Flask 
+from flask import Flask ,render_template,redirect,url_for,request,session,send_file
 
 app = Flask(__name__)
 app.secret_key = "A_A"
 
+application_id = "633727"
+access_key = "KzqvEfxpO_OpX9EJPcsbfaCTh6mAsStbTG67gvRt1ok"
+secret_key = "Xn6yHrNWNH6J11HkZo5jvzw9GLku1m5wdK46PPfu5Ck"
 
+params = {
+    "client_id": access_key,
+    "per_page": 20,
+    "page": 1
+}
+
+def fetch_unsplash_api():
+    
+
+
+@app.route('/',methods=['GET','POST'])
+def main():
+    #sup_infos = infos_supplementaires , elles peuvent etres facultatives
+    return render_template('home.html',sup_infos=["azerty","qwerty","01001"])
 
 
 
