@@ -1,0 +1,7 @@
+if user and check_password_hash(user.password, password):
+            session['user'] = user
+            flash('Vous êtes connecté.', 'success')
+            return redirect(url_for('index')), 201
+        else:
+            flash('Identifiants invalides.', 'danger')
+            return render_template('login.html'), 400

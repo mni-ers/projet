@@ -5,3 +5,7 @@ __pycache__/
 *.py[cod]
 
 # Static files
+/instance
+./instance
+./brouillon
+./tests

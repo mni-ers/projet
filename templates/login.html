@@ -110,13 +110,34 @@
 <body>
     <div class="login-container">
         <h1>Connexion</h1>
-        <form action="#" method="post">
+        <form action="/login" method="post">
             <input type="text" name="username" placeholder="Nom d'utilisateur" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
             <input type="submit" value="Se connecter">
         </form>
-        <a href="#">Mot de passe oublié?</a>
+        {% if message %}
+        <a href="#">{{message[0]}}</a>
+        {% else %}
+        <a href="/signup">Create an Account</a>
+        {%endif%}
     </div>
 </body>
+
+<script>
+
+    
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            return parts.pop().split(";").shift();
+            }
+
+            // Récupérer les informations de l'utilisateur connecté
+        var userInfo = JSON.parse(getCookie('user_info'));
+
+            // Afficher les informations de l'utilisateur
+        console.log('Utilisateur connecté :', userInfo);
+        
+</script>
 
 </html>
