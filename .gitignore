@@ -6,6 +6,6 @@ __pycache__/
 
 # Static files
 /instance
-./instance
-./brouillon
-./tests
+/instance
+/brouillon
+/tests
