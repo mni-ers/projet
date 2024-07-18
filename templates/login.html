@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slide-up 0.6s ease;
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .login-container input[type="submit"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            background: #c0392b; /* Rouge foncé */
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            box-sizing: border-box;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background: #e74c3c; /* Rouge plus clair au survol */
+        }
+
+        .login-container a {
+            text-decoration: none;
+            color: #c0392b; /* Rouge foncé */
+            display: block;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 600px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h1 {
+                font-size: 2em;
+            }
+
+            .login-container input[type="text"],
+            .login-container input[type="password"],
+            .login-container input[type="submit"] {
+                width: calc(100% - 20px);
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <form action="#" method="post">
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <input type="submit" value="Se connecter">
+        </form>
+        <a href="#">Mot de passe oublié?</a>
+    </div>
+</body>
+
+</html>
