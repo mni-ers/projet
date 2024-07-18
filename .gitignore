@@ -6,6 +6,5 @@ __pycache__/
 
 # Static files
 /instance
-/instance
-/brouillon.txt
-/tests.py
+brouillon.txt
+tests.py
