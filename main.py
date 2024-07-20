@@ -2,11 +2,22 @@ from flask import Flask, render_template, redirect, url_for, flash, request, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from pyunsplash import PyUnsplash
+
+
 
 app = Flask(__name__)
 app.secret_key = 'A_A'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
+application_id = "633727"
+access_key = "KzqvEfxpO_OpX9EJPcsbfaCTh6mAsStbTG67gvRt1ok"
+secret_key = "Xn6yHrNWNH6J11HkZo5jvzw9GLku1m5wdK46PPfu5Ck"
+params = {
+    'client_id': access_key,
+    'per_page': 50,  # Nombre d'images à récupérer par page
+    'page': 1  # Numéro de la page
+}
 
 class User(db.Model):
     """
@@ -34,7 +45,7 @@ class User(db.Model):
 def index():
     #page d'acceuil 
     if 'user' in session:
-        return render_template('home.html', user=session['user'],rigth=True)
+        return render_template('home.html', user=session['user'])
     else:
          return render_template('home.html')
 
@@ -60,9 +71,8 @@ def signup():
         )
         db.session.add(new_user)
         db.session.commit()
-        flash('Vous vous êtes inscrit avec succès. Vous pouvez maintenant vous connecter.', 'success')
         session['user'] = {new_user.username,new_user.id,new_user.email}
-        redirect('home.html'), 201
+        redirect('home.html'), 201,
 
     return render_template('signup.html')
 
@@ -82,11 +92,13 @@ def login():
         if user and check_password_hash(user_json['password_hash'], password):
                 user_sendable = {'username':user.username,'email':user.email,'id':user.id,'created_at':user.created_at}
                 session['user'] = user_sendable
+                print(user)
                 return render_template('home.html'),200
-        elif check_password_hash == False: 
+        elif check_password_hash == False:
                 return render_template('login.html',message="Incorrect Informations"), 400
         else:
             render_template('error.html',message="Not User Found")
+
 
     return render_template('login.html')
 
@@ -98,7 +110,41 @@ def logout():
     flash('Vous vous êtes déconnecté.', 'success')
     return redirect(url_for('index'))
 
+@app.route('/permission',methods=['POST','GET'])
+def sender():
+    if request.method == 'GET':
+        if 'user' in session:
+            return {'permission':'Authorized','statu':200}
+        else:
+             return {'permission':'Denied','statu':400}
+
+@app.route('/images',methods=['POST','GET'])
+def fetch_unsplash():
+    if request.method == 'GET':
+        pu = PyUnsplash(api_key=access_key)
+        photos_response = pu.photos(type_='random', count=50, featured=True, query="splash")
+
+        photo_data = []
+        for photo in photos_response.entries:
+             photo_data.append({
+            'id': photo.id,
+            'download_link': photo.link_download,
+            'url': photo.url,
+            #'title': photo.title,
+            #'description': photo.description,
+            #'created_at': photo.created_at,
+            #'width': photo.width,
+            #'height': photo.height,
+            #'orientation': photo.orientation,
+            #'downloads': photo.downloads,
+            #'likes': photo.likes,
+            #'tags': [tag.title for tag in photo.tags]
+        })
+        return jsonify({'photos': photo_data}), 200
+
+
+
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        db.create_all() 
     app.run(debug=True)

@@ -162,13 +162,13 @@
         }
     </style>
     <!-- FontAwesome Icons CDN -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   
 </head>
 <body>
     <div class="header">
         <div class="logo">Pinterest</div>
         <div class="search-bar">
-            <input type="text" placeholder="Rechercher...">
+            <input type="text" placeholder="Rechercher..." id="searchBar">
         {% if session['user'] %}
         <button id="btn1"><a href="/logout">deconnexion</a></button>
         {% else %}
@@ -184,10 +184,8 @@
         </div>
     </div>
 
-    <div class="content">
-        {% if session['user']%}
-            <h1>{{session['user']['username']}}</h1>
-        {% endif %}
+    <div class="content" id="container">
+       
     </div>
 
     <div class="footer">
@@ -203,7 +201,8 @@
     </div>
 
     <script>
-        function openPinPage(title, author, date, imageUrl) {
+        const container = document.getElementById('container')
+        function openPinPage(imageUrl) {
             const pinPage = window.open("", "_blank");
             pinPage.document.write(`
                 <html>
@@ -255,6 +254,74 @@
             `);
             pinPage.document.close();
         }
+        var permission = false;
+        document.addEventListener("DOMContentLoaded",(e)=>{
+            try{
+                const url = "/permission"
+                console.log(url)
+                fetch(url)
+                .then(response=>response.json())
+                .then(response=>{
+                    if(response.permission == "Authorized"){
+                        permission = true
+                    }
+                })
+            }catch(e){
+                console.log(e)
+            }
+        })
+        const get_and_append_images = () => {
+  let images_url = [];
+  try {
+    if (permission) {
+      fetch("/images", { method: 'GET' })
+        .then(response => response.json())
+        .then(response => {
+          const container = document.getElementById('container');
+          response.photos.forEach(photo => {
+            const div = document.createElement('div');
+            div.classList.add('pin');
+            div.setAttribute('onclick', `openPinPage('${photo.urls.regular}')`);
+
+            const img = document.createElement('img');
+            img.src = photo.urls.regular;
+            img.alt = 'Mountain View';
+
+            const pinInfo = document.createElement('div');
+            pinInfo.classList.add('pin-info');
+
+            const h4 = document.createElement('h4');
+            h4.textContent = 'Mountain View';
+
+            const p = document.createElement('p');
+            p.textContent = 'Jane Smith';
+
+            const button = document.createElement('button');
+            button.textContent = 'Enregistrer';
+            button.setAttribute('onclick', `openPinPage('${photo.urls.regular}')`);
+
+            pinInfo.appendChild(h4);
+            pinInfo.appendChild(p);
+            pinInfo.appendChild(button);
+
+            div.appendChild(img);
+            div.appendChild(pinInfo);
+
+            container.appendChild(div);
+
+            console.log(photo);
+          });
+        });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+        const bar = document.getElementById('searchBar')
+        bar.addEventListener('click',(e)=>{
+            get_and_append_images()
+        })
+        
     </script>
 </body>
 </html>
